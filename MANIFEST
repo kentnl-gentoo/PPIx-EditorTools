@@ -1,4 +1,5 @@
 Build.PL
+Changes
 INSTALL
 lib/PPIx/EditorTools.pm
 lib/PPIx/EditorTools/FindUnmatchedBrace.pm
@@ -7,8 +8,8 @@ lib/PPIx/EditorTools/IntroduceTemporaryVariable.pm
 lib/PPIx/EditorTools/RenamePackage.pm
 lib/PPIx/EditorTools/RenamePackageFromPath.pm
 lib/PPIx/EditorTools/RenameVariable.pm
+lib/PPIx/EditorTools/ReturnObject.pm
 MANIFEST			This list of files
-META.yml
 README
 t/00-use.t
 t/10-findunmatchedbrace.t
@@ -18,4 +19,11 @@ t/10-renamepackage.t
 t/10-renamepackagefrompath.t
 t/10-renamevariable.t
 TODO
+xt/95-prereq.t
+xt/96-kwalitee.t
+xt/97-critic.t
+xt/98-pod.t
+xt/99-podcoverage.t
+xt/perlcriticrc
 Makefile.PL
+META.yml

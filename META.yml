@@ -1,6 +1,6 @@
 ---
 name: PPIx-EditorTools
-version: 0.03
+version: 0.04
 author:
   - |-
     Steffen Mueller C<smueller@cpan.org>.
@@ -8,7 +8,7 @@ author:
 abstract: Utility methods and base class for manipulating Perl via PPI
 license: perl
 resources:
-  license: http://dev.perl.org/licenses/
+  license: ~
 requires:
   Class::XSAccessor: 0
   PPI: 0
@@ -18,25 +18,28 @@ build_requires:
 provides:
   PPIx::EditorTools:
     file: lib/PPIx/EditorTools.pm
-    version: 0.03
+    version: 0.04
   PPIx::EditorTools::FindUnmatchedBrace:
     file: lib/PPIx/EditorTools/FindUnmatchedBrace.pm
-    version: 0.02
+    version: 0.04
   PPIx::EditorTools::FindVariableDeclaration:
     file: lib/PPIx/EditorTools/FindVariableDeclaration.pm
-    version: 0.02
+    version: 0.04
   PPIx::EditorTools::IntroduceTemporaryVariable:
     file: lib/PPIx/EditorTools/IntroduceTemporaryVariable.pm
-    version: 0.02
+    version: 0.04
   PPIx::EditorTools::RenamePackage:
     file: lib/PPIx/EditorTools/RenamePackage.pm
-    version: 0.02
+    version: 0.04
   PPIx::EditorTools::RenamePackageFromPath:
     file: lib/PPIx/EditorTools/RenamePackageFromPath.pm
-    version: 0.02
+    version: 0.04
   PPIx::EditorTools::RenameVariable:
     file: lib/PPIx/EditorTools/RenameVariable.pm
-    version: 0.02
+    version: 0.04
+  PPIx::EditorTools::ReturnObject:
+    file: lib/PPIx/EditorTools/ReturnObject.pm
+    version: 0.04
 generated_by: Module::Build version 0.32
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
