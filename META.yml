@@ -1,46 +1,29 @@
 ---
-name: PPIx-EditorTools
-version: 0.04
+abstract: 'Utility methods and base class for manipulating Perl via PPI'
 author:
-  - |-
-    Steffen Mueller C<smueller@cpan.org>.
-    Repackaged by Mark Grimes C<mgrimes@cpan.org>.
-abstract: Utility methods and base class for manipulating Perl via PPI
-license: perl
-resources:
-  license: ~
-requires:
-  Class::XSAccessor: 0
-  PPI: 0
-  perl: 5.010
+  - 'Steffen Mueller C<smueller@cpan.org>'
 build_requires:
-  Test::Differences: 0
-provides:
-  PPIx::EditorTools:
-    file: lib/PPIx/EditorTools.pm
-    version: 0.04
-  PPIx::EditorTools::FindUnmatchedBrace:
-    file: lib/PPIx/EditorTools/FindUnmatchedBrace.pm
-    version: 0.04
-  PPIx::EditorTools::FindVariableDeclaration:
-    file: lib/PPIx/EditorTools/FindVariableDeclaration.pm
-    version: 0.04
-  PPIx::EditorTools::IntroduceTemporaryVariable:
-    file: lib/PPIx/EditorTools/IntroduceTemporaryVariable.pm
-    version: 0.04
-  PPIx::EditorTools::RenamePackage:
-    file: lib/PPIx/EditorTools/RenamePackage.pm
-    version: 0.04
-  PPIx::EditorTools::RenamePackageFromPath:
-    file: lib/PPIx/EditorTools/RenamePackageFromPath.pm
-    version: 0.04
-  PPIx::EditorTools::RenameVariable:
-    file: lib/PPIx/EditorTools/RenameVariable.pm
-    version: 0.04
-  PPIx::EditorTools::ReturnObject:
-    file: lib/PPIx/EditorTools/ReturnObject.pm
-    version: 0.04
-generated_by: Module::Build version 0.32
+  ExtUtils::MakeMaker: 6.42
+  Test::Differences: 0.4801
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 0.91'
+license: perl
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+module_name: PPIx::EditorTools
+name: PPIx-EditorTools
+no_index:
+  directory:
+    - inc
+    - t
+    - xt
+requires:
+  Class::XSAccessor: 1.02
+  PPI: 1.203
+  perl: 5.8.0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.05
