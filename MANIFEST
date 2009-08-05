@@ -1,3 +1,4 @@
+.releaserc
 Changes
 inc/Module/Install.pm
 inc/Module/Install/Base.pm
@@ -8,7 +9,6 @@ inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
-INSTALL
 lib/PPIx/EditorTools.pm
 lib/PPIx/EditorTools/FindUnmatchedBrace.pm
 lib/PPIx/EditorTools/FindVariableDeclaration.pm
@@ -28,7 +28,6 @@ t/03-introducetemporaryvariable.t
 t/04-renamepackage.t
 t/05-renamepackagefrompath.t
 t/06-renamevariable.t
-TODO
 xt/95-prereq.t
 xt/96-kwalitee.t
 xt/97-critic.t
