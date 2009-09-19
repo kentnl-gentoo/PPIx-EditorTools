@@ -14,7 +14,7 @@ use Class::XSAccessor 1.02
 use PPI 1.203;
 use PPIx::EditorTools::ReturnObject;
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 =pod
 
@@ -197,27 +197,16 @@ sub find_token_at_location {
     $document->index_locations();
 
     foreach my $token ( $document->tokens ) {
-        my $tloc = $token->location;
-        return $token->previous_token()
-          if $tloc->[0] > $location->[0]
-              or (    $tloc->[0] == $location->[0]
-                  and $tloc->[1] > $location->[1] );
+        my $loc = $token->location;
+        if( $loc->[0] > $location->[0]
+              or ( $loc->[0] == $location->[0] and $loc->[1] > $location->[1] ))
+        {
+            $document->flush_locations();
+            return $token->previous_token();
+        }
     }
-
+    $document->flush_locations();
     return ();
-
-    # old way that would only handle beginning of tokens; Should probably simply go away.; Should probably simply go away.
-    #my $variable_token = $document->find_first(
-    #	sub {
-    #		my $elem = $_[1];
-    #		return 0 if not $elem->isa('PPI::Token');
-    #		my $loc = $elem->location;
-    #		return 0 if $loc->[0] != $location->[0] or $loc->[1] != $location->[1];
-    #		return 1;
-    #	},
-    #);
-    #
-    #return $variable_token;
 }
 
 # given either a PPI::Token::Symbol (i.e. a variable)
@@ -249,6 +238,12 @@ sub find_variable_declaration {
     my $document = $cursor->top();
     my $declaration;
     my $prev_cursor;
+
+	# This finds variable declarations if you're above it
+	if($cursor->parent->isa('PPI::Statement::Variable')) {
+		return $cursor->parent;
+	}
+
     while (1) {
         $prev_cursor = $cursor;
         $cursor      = $cursor->parent;
