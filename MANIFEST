@@ -26,7 +26,8 @@ t/02-findvariabledeclaration.t
 t/03-introducetemporaryvariable.t
 t/04-renamepackage.t
 t/05-renamepackagefrompath.t
-t/06-renamevariable.t
+t/06-camelcasing.t
+t/07-renamevariable.t
 TODO
 xt/95-prereq.t
 xt/96-kwalitee.t

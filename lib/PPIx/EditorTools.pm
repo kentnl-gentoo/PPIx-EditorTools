@@ -14,7 +14,7 @@ use Class::XSAccessor 1.02
 use PPI 1.203;
 use PPIx::EditorTools::ReturnObject;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 =pod
 
@@ -242,6 +242,11 @@ sub find_variable_declaration {
 	# This finds variable declarations if you're above it
 	if($cursor->parent->isa('PPI::Statement::Variable')) {
 		return $cursor->parent;
+	}
+
+	# This finds variable declarations if you're above it and it has the form my ($foo , $bar);
+	if($cursor->parent->isa('PPI::Statement::Expression')  && $cursor->parent->parent->parent->isa('PPI::Statement::Variable')  ) {
+		return $cursor->parent->parent->parent;
 	}
 
     while (1) {
