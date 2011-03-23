@@ -30,9 +30,10 @@ my %WriteMakefileArgs = (
     'Class::XSAccessor' => '1.02',
     'File::Basename' => '0',
     'File::Spec' => '0',
-    'PPI' => '1.203'
+    'PPI' => '1.203',
+    'PPI::Find' => '0'
   },
-  'VERSION' => '0.11',
+  'VERSION' => '0.12',
   'test' => {
     'TESTS' => 't/*.t'
   }

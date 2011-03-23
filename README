@@ -1,11 +1,11 @@
 
 
 This archive contains the distribution PPIx-EditorTools,
-version 0.11:
+version 0.12:
 
   Utility methods and base class for manipulating Perl via PPI
 
-This software is copyright (c) 2010 by The Padre development team as listed in Padre.pm.
+This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,6 +1,6 @@
 package PPIx::EditorTools::FindVariableDeclaration;
 BEGIN {
-  $PPIx::EditorTools::FindVariableDeclaration::VERSION = '0.11';
+  $PPIx::EditorTools::FindVariableDeclaration::VERSION = '0.12';
 }
 
 # ABSTRACT: Finds where a variable was declared using PPI
@@ -15,25 +15,25 @@ use Class::XSAccessor accessors => { 'location' => 'location' };
 
 
 sub find {
-    my ( $self, %args ) = @_;
-    $self->process_doc(%args);
-    my $column = $args{column} or croak "column required";
-    my $line   = $args{line}   or croak "line required";
-    my $location = [ $line, $column ];
+	my ( $self, %args ) = @_;
+	$self->process_doc(%args);
+	my $column = $args{column} or croak "column required";
+	my $line   = $args{line}   or croak "line required";
+	my $location = [ $line, $column ];
 
-    my $ppi = $self->ppi;
-    $ppi->flush_locations;
+	my $ppi = $self->ppi;
+	$ppi->flush_locations;
 
-    my $token = PPIx::EditorTools::find_token_at_location( $ppi, $location );
-    croak "no token" unless $token;
+	my $token = PPIx::EditorTools::find_token_at_location( $ppi, $location );
+	croak "no token" unless $token;
 
-    my $declaration = PPIx::EditorTools::find_variable_declaration($token);
-    croak "no declaration" unless $declaration;
+	my $declaration = PPIx::EditorTools::find_variable_declaration($token);
+	croak "no declaration" unless $declaration;
 
-    return PPIx::EditorTools::ReturnObject->new(
-        ppi     => $ppi,
-        element => $declaration,
-    );
+	return PPIx::EditorTools::ReturnObject->new(
+		ppi     => $ppi,
+		element => $declaration,
+	);
 }
 
 1;
@@ -48,7 +48,7 @@ PPIx::EditorTools::FindVariableDeclaration - Finds where a variable was declared
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -114,7 +114,7 @@ Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by The Padre development team as listed in Padre.pm.
+This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

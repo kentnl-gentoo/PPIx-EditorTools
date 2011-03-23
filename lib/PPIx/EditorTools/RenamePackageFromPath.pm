@@ -1,6 +1,6 @@
 package PPIx::EditorTools::RenamePackageFromPath;
 BEGIN {
-  $PPIx::EditorTools::RenamePackageFromPath::VERSION = '0.11';
+  $PPIx::EditorTools::RenamePackageFromPath::VERSION = '0.12';
 }
 
 # ABSTRACT: Change the package name based on the files path
@@ -11,8 +11,8 @@ use warnings;
 use Carp;
 
 use Class::XSAccessor accessors => {
-    'replacement' => 'replacement',
-    'filename'    => 'filename',
+	'replacement' => 'replacement',
+	'filename'    => 'filename',
 };
 
 use base 'PPIx::EditorTools';
@@ -23,25 +23,24 @@ use File::Basename;
 
 
 sub rename {
-    my ( $self, %args ) = @_;
-    $self->process_doc(%args);
-    my $path = $args{filename} || croak "filename required";
+	my ( $self, %args ) = @_;
+	$self->process_doc(%args);
+	my $path = $args{filename} || croak "filename required";
 
-    my $dir = dirname $path;
-    my $file = basename $path, qw/.pm .PM .Pm/;
+	my $dir = dirname $path;
+	my $file = basename $path, qw/.pm .PM .Pm/;
 
-    my @directories =
-      grep { $_ && !/^\.$/ } File::Spec->splitdir( File::Spec->rel2abs($dir) );
-    my $replacement;
-    if ( grep { /^lib$/ } @directories ) {
-        while ( shift(@directories) !~ /^lib$/ ) { }
-    } else {
-        @directories = grep { $_ && !/^\.$/ } File::Spec->splitdir($dir);
-    }
-    $replacement = join( '::', @directories, $file );
+	my @directories =
+		grep { $_ && !/^\.$/ } File::Spec->splitdir( File::Spec->rel2abs($dir) );
+	my $replacement;
+	if ( grep {/^lib$/} @directories ) {
+		while ( shift(@directories) !~ /^lib$/ ) { }
+	} else {
+		@directories = grep { $_ && !/^\.$/ } File::Spec->splitdir($dir);
+	}
+	$replacement = join( '::', @directories, $file );
 
-    return PPIx::EditorTools::RenamePackage->new( ppi => $self->ppi )
-      ->rename( replacement => $replacement );
+	return PPIx::EditorTools::RenamePackage->new( ppi => $self->ppi )->rename( replacement => $replacement );
 
 }
 
@@ -57,7 +56,7 @@ PPIx::EditorTools::RenamePackageFromPath - Change the package name based on the 
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -129,7 +128,7 @@ Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by The Padre development team as listed in Padre.pm.
+This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

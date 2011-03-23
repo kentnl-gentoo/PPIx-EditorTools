@@ -10,6 +10,7 @@ lib/PPIx/EditorTools.pm
 lib/PPIx/EditorTools/FindUnmatchedBrace.pm
 lib/PPIx/EditorTools/FindVariableDeclaration.pm
 lib/PPIx/EditorTools/IntroduceTemporaryVariable.pm
+lib/PPIx/EditorTools/Outline.pm
 lib/PPIx/EditorTools/RenamePackage.pm
 lib/PPIx/EditorTools/RenamePackageFromPath.pm
 lib/PPIx/EditorTools/RenameVariable.pm
@@ -23,6 +24,7 @@ t/05-renamepackagefrompath.t
 t/06-camelcasing.t
 t/07-renamevariable.t
 t/08-getallvariabledeclarations.t
+t/09-outline.t
 t/release-check-changes.t
 t/release-eol.t
 t/release-pod-syntax.t

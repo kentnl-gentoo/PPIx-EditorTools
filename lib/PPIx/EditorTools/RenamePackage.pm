@@ -1,11 +1,12 @@
 package PPIx::EditorTools::RenamePackage;
 BEGIN {
-  $PPIx::EditorTools::RenamePackage::VERSION = '0.11';
+  $PPIx::EditorTools::RenamePackage::VERSION = '0.12';
 }
 
 # ABSTRACT: Change the package name
 
 use strict;
+
 BEGIN {
 	$^W = 1;
 }
@@ -18,21 +19,23 @@ use Carp;
 
 
 sub rename {
-    my ( $self, %args ) = @_;
-    $self->process_doc(%args);
-    my $replacement = $args{replacement} || croak "replacement required";
+	my ( $self, %args ) = @_;
+	$self->process_doc(%args);
+	my $replacement = $args{replacement} || croak "replacement required";
 
-    my $doc = $self->ppi;
+	my $doc = $self->ppi;
 
-    # TODO: support MooseX::Declare
-    my $package = $doc->find_first('PPI::Statement::Package')
-      or die "no package found";
-    my $namespace = $package->schild(1) or croak "package name not found";
-    $namespace->isa('PPI::Token::Word') or croak "package name not found";
-    $namespace->{content} = $replacement;
+	# TODO: support MooseX::Declare
+	my $package = $doc->find_first('PPI::Statement::Package')
+		or die "no package found";
+	my $namespace = $package->schild(1) or croak "package name not found";
+	$namespace->isa('PPI::Token::Word') or croak "package name not found";
+	$namespace->{content} = $replacement;
 
-    return PPIx::EditorTools::ReturnObject->new( ppi => $doc,
-        element => $package );
+	return PPIx::EditorTools::ReturnObject->new(
+		ppi     => $doc,
+		element => $package
+	);
 }
 
 1;
@@ -47,7 +50,7 @@ PPIx::EditorTools::RenamePackage - Change the package name
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -113,7 +116,7 @@ Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by The Padre development team as listed in Padre.pm.
+This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,6 +1,6 @@
 package PPIx::EditorTools::ReturnObject;
 BEGIN {
-  $PPIx::EditorTools::ReturnObject::VERSION = '0.11';
+  $PPIx::EditorTools::ReturnObject::VERSION = '0.12';
 }
 
 # ABSTRACT: Simple object to return values from PPIx::EditorTools
@@ -12,54 +12,54 @@ use Carp;
 
 
 sub new {
-    my $class = shift;
-    return bless {@_}, ref($class) || $class;
+	my $class = shift;
+	return bless {@_}, ref($class) || $class;
 }
 
 sub element {
-    my ($self) = @_;
+	my ($self) = @_;
 
-    # If element is a code ref, run the code once then cache the
-    # result
-    if (    exists $self->{element}
-        and ref( $self->{element} )
-        and ref( $self->{element} ) eq 'CODE' )
-    {
-        $self->{element} = $self->{element}->(@_);
-    }
+	# If element is a code ref, run the code once then cache the
+	# result
+	if (    exists $self->{element}
+		and ref( $self->{element} )
+		and ref( $self->{element} ) eq 'CODE' )
+	{
+		$self->{element} = $self->{element}->(@_);
+	}
 
-    return $self->{element};
+	return $self->{element};
 }
 
 sub ppi {
-    my ( $self, $doc ) = @_;
+	my ( $self, $doc ) = @_;
 
-    # $self->{ppi} = $doc if $doc;    # TODO: and isa?
+	# $self->{ppi} = $doc if $doc;    # TODO: and isa?
 
-    return $self->{ppi} if $self->{ppi};
+	return $self->{ppi} if $self->{ppi};
 
-    if ( $self->{code} ) {
-        my $code = $self->{code};
-        $self->{ppi} = PPI::Document->new( \$code );
-        return $self->{ppi};
-    }
+	if ( $self->{code} ) {
+		my $code = $self->{code};
+		$self->{ppi} = PPI::Document->new( \$code );
+		return $self->{ppi};
+	}
 
-    return;
+	return;
 }
 
 sub code {
-    my ( $self, $doc ) = @_;
+	my ( $self, $doc ) = @_;
 
-    # $self->{code} = $doc if $doc;
+	# $self->{code} = $doc if $doc;
 
-    return $self->{code} if $self->{code};
+	return $self->{code} if $self->{code};
 
-    if ( $self->{ppi} ) {
-        $self->{code} = $self->{ppi}->serialize;
-        return $self->{code};
-    }
+	if ( $self->{ppi} ) {
+		$self->{code} = $self->{ppi}->serialize;
+		return $self->{code};
+	}
 
-    return;
+	return;
 }
 
 1;
@@ -74,7 +74,7 @@ PPIx::EditorTools::ReturnObject - Simple object to return values from PPIx::Edit
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 SYNOPSIS
 
@@ -159,7 +159,7 @@ Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by The Padre development team as listed in Padre.pm.
+This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
