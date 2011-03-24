@@ -1,6 +1,6 @@
 package PPIx::EditorTools::IntroduceTemporaryVariable;
 BEGIN {
-  $PPIx::EditorTools::IntroduceTemporaryVariable::VERSION = '0.12';
+  $PPIx::EditorTools::IntroduceTemporaryVariable::VERSION = '0.13';
 }
 
 # ABSTRACT: Introduces a temporary variable using PPI
@@ -115,7 +115,7 @@ PPIx::EditorTools::IntroduceTemporaryVariable - Introduces a temporary variable 
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

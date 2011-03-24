@@ -1,6 +1,6 @@
 package PPIx::EditorTools;
 BEGIN {
-  $PPIx::EditorTools::VERSION = '0.12';
+  $PPIx::EditorTools::VERSION = '0.13';
 }
 
 # ABSTRACT: Utility methods and base class for manipulating Perl via PPI
@@ -333,7 +333,7 @@ PPIx::EditorTools - Utility methods and base class for manipulating Perl via PPI
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

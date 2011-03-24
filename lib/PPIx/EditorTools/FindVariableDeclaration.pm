@@ -1,6 +1,6 @@
 package PPIx::EditorTools::FindVariableDeclaration;
 BEGIN {
-  $PPIx::EditorTools::FindVariableDeclaration::VERSION = '0.12';
+  $PPIx::EditorTools::FindVariableDeclaration::VERSION = '0.13';
 }
 
 # ABSTRACT: Finds where a variable was declared using PPI
@@ -48,7 +48,7 @@ PPIx::EditorTools::FindVariableDeclaration - Finds where a variable was declared
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

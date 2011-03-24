@@ -1,6 +1,6 @@
 package PPIx::EditorTools::RenamePackage;
 BEGIN {
-  $PPIx::EditorTools::RenamePackage::VERSION = '0.12';
+  $PPIx::EditorTools::RenamePackage::VERSION = '0.13';
 }
 
 # ABSTRACT: Change the package name
@@ -50,7 +50,7 @@ PPIx::EditorTools::RenamePackage - Change the package name
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

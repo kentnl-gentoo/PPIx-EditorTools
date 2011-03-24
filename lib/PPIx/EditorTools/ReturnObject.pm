@@ -1,6 +1,6 @@
 package PPIx::EditorTools::ReturnObject;
 BEGIN {
-  $PPIx::EditorTools::ReturnObject::VERSION = '0.12';
+  $PPIx::EditorTools::ReturnObject::VERSION = '0.13';
 }
 
 # ABSTRACT: Simple object to return values from PPIx::EditorTools
@@ -74,7 +74,7 @@ PPIx::EditorTools::ReturnObject - Simple object to return values from PPIx::Edit
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

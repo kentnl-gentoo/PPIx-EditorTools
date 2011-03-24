@@ -1,6 +1,6 @@
 package PPIx::EditorTools::RenamePackageFromPath;
 BEGIN {
-  $PPIx::EditorTools::RenamePackageFromPath::VERSION = '0.12';
+  $PPIx::EditorTools::RenamePackageFromPath::VERSION = '0.13';
 }
 
 # ABSTRACT: Change the package name based on the files path
@@ -56,7 +56,7 @@ PPIx::EditorTools::RenamePackageFromPath - Change the package name based on the 
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

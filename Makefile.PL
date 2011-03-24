@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
     'PPI' => '1.203',
     'PPI::Find' => '0'
   },
-  'VERSION' => '0.12',
+  'VERSION' => '0.13',
   'test' => {
     'TESTS' => 't/*.t'
   }

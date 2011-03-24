@@ -1,9 +1,9 @@
 package PPIx::EditorTools::Outline;
 BEGIN {
-  $PPIx::EditorTools::Outline::VERSION = '0.12';
+  $PPIx::EditorTools::Outline::VERSION = '0.13';
 }
 
-# ABSTRACT: PPI-based outline builder
+# ABSTRACT: Collect use pragmata, modules, subroutiones
 
 use 5.008;
 use strict;
@@ -131,11 +131,11 @@ sub find {
 
 =head1 NAME
 
-PPIx::EditorTools::Outline - PPI-based outline builder
+PPIx::EditorTools::Outline - Collect use pragmata, modules, subroutiones
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 

@@ -1,6 +1,6 @@
 package PPIx::EditorTools::FindUnmatchedBrace;
 BEGIN {
-  $PPIx::EditorTools::FindUnmatchedBrace::VERSION = '0.12';
+  $PPIx::EditorTools::FindUnmatchedBrace::VERSION = '0.13';
 }
 
 # ABSTRACT: PPI-based unmatched-brace-finder
@@ -50,7 +50,7 @@ PPIx::EditorTools::FindUnmatchedBrace - PPI-based unmatched-brace-finder
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
