@@ -1,7 +1,4 @@
 package PPIx::EditorTools::Outline;
-BEGIN {
-  $PPIx::EditorTools::Outline::VERSION = '0.13';
-}
 
 # ABSTRACT: Collect use pragmata, modules, subroutiones
 
@@ -15,6 +12,39 @@ use Class::XSAccessor accessors => {};
 
 use PPI;
 
+our $VERSION = '0.14';
+
+=pod
+
+=head1 SYNOPSIS
+
+  my $outline = PPIx::EditorTools::Outline->new->find(
+        code => "package TestPackage;\nsub x { 1;\n"
+      );
+ print Dumper $outline;
+
+=head1 DESCRIPTION
+
+Return a list of pragmatas, modules, methods of a C<PPI::Document>.
+
+=head1 METHODS
+
+=over 4
+
+=item new()
+
+Constructor. Generally shouldn't be called with any arguments.
+
+=item find( ppi => PPI::Document $ppi )
+=item find( code => Str $code )
+
+Accepts either a C<PPI::Document> to process or a string containing
+the code (which will be converted into a C<PPI::Document>) to process.
+Return a reference to a hash.
+
+=back
+
+=cut
 
 
 sub find {
@@ -125,81 +155,14 @@ sub find {
 
 1;
 
-
-
-=pod
-
-=head1 NAME
-
-PPIx::EditorTools::Outline - Collect use pragmata, modules, subroutiones
-
-=head1 VERSION
-
-version 0.13
-
-=head1 SYNOPSIS
-
-  my $outline = PPIx::EditorTools::Outline->new->find(
-        code => "package TestPackage;\nsub x { 1;\n"
-      );
- print Dumper $outline;
-
-=head1 DESCRIPTION
-
-Return a list of pragmatas, modules, methods of a C<PPI::Document>.
-
-=head1 METHODS
-
-=over 4
-
-=item new()
-
-Constructor. Generally shouldn't be called with any arguments.
-
-=item find( ppi => PPI::Document $ppi )
-=item find( code => Str $code )
-
-Accepts either a C<PPI::Document> to process or a string containing
-the code (which will be converted into a C<PPI::Document>) to process.
-Return a reference to a hash.
-
-=back
+__END__
 
 =head1 SEE ALSO
 
 This class inherits from C<PPIx::EditorTools>.
 Also see L<App::EditorTools>, L<Padre>, and L<PPI>.
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Steffen Mueller C<smueller@cpan.org>
-
-=item *
-
-Repackaged by Mark Grimes C<mgrimes@cpan.org>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-
 
 # Copyright 2008-2011 The Padre development team as listed in Padre.pm.
 # LICENSE

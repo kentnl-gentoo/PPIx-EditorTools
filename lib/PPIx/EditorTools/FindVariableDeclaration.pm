@@ -1,7 +1,4 @@
 package PPIx::EditorTools::FindVariableDeclaration;
-BEGIN {
-  $PPIx::EditorTools::FindVariableDeclaration::VERSION = '0.13';
-}
 
 # ABSTRACT: Finds where a variable was declared using PPI
 
@@ -13,42 +10,9 @@ use Carp;
 use base 'PPIx::EditorTools';
 use Class::XSAccessor accessors => { 'location' => 'location' };
 
-
-sub find {
-	my ( $self, %args ) = @_;
-	$self->process_doc(%args);
-	my $column = $args{column} or croak "column required";
-	my $line   = $args{line}   or croak "line required";
-	my $location = [ $line, $column ];
-
-	my $ppi = $self->ppi;
-	$ppi->flush_locations;
-
-	my $token = PPIx::EditorTools::find_token_at_location( $ppi, $location );
-	croak "no token" unless $token;
-
-	my $declaration = PPIx::EditorTools::find_variable_declaration($token);
-	croak "no declaration" unless $declaration;
-
-	return PPIx::EditorTools::ReturnObject->new(
-		ppi     => $ppi,
-		element => $declaration,
-	);
-}
-
-1;
-
-
+our $VERSION = '0.14';
 
 =pod
-
-=head1 NAME
-
-PPIx::EditorTools::FindVariableDeclaration - Finds where a variable was declared using PPI
-
-=head1 VERSION
-
-version 0.13
 
 =head1 SYNOPSIS
 
@@ -89,41 +53,40 @@ Croaks with a "no declaration" exception if unable to find the declaration.
 
 =back
 
+=cut
+
+sub find {
+	my ( $self, %args ) = @_;
+	$self->process_doc(%args);
+	my $column = $args{column} or croak "column required";
+	my $line   = $args{line}   or croak "line required";
+	my $location = [ $line, $column ];
+
+	my $ppi = $self->ppi;
+	$ppi->flush_locations;
+
+	my $token = PPIx::EditorTools::find_token_at_location( $ppi, $location );
+	croak "no token" unless $token;
+
+	my $declaration = PPIx::EditorTools::find_variable_declaration($token);
+	croak "no declaration" unless $declaration;
+
+	return PPIx::EditorTools::ReturnObject->new(
+		ppi     => $ppi,
+		element => $declaration,
+	);
+}
+
+1;
+
+__END__
+
 =head1 SEE ALSO
 
 This class inherits from C<PPIx::EditorTools>.
 Also see L<App::EditorTools>, L<Padre>, and L<PPI>.
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Steffen Mueller C<smueller@cpan.org>
-
-=item *
-
-Repackaged by Mark Grimes C<mgrimes@cpan.org>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-
 
 # Copyright 2008-2009 The Padre development team as listed in Padre.pm.
 # LICENSE

@@ -1,7 +1,4 @@
 package PPIx::EditorTools::RenameVariable;
-BEGIN {
-  $PPIx::EditorTools::RenameVariable::VERSION = '0.13';
-}
 
 # ABSTRACT: Lexically replace a variable name in Perl code
 
@@ -13,6 +10,61 @@ use Carp;
 use base 'PPIx::EditorTools';
 use Class::XSAccessor;
 
+our $VERSION = '0.14';
+
+=pod
+
+=head1 SYNOPSIS
+
+    my $munged = PPIx::EditorTools::RenameVariable->new->rename(
+        code        => $code,
+        line        => 15,
+        column      => 13,
+        replacement => 'stuff',
+    );
+    my $code_as_strig = $munged->code;
+    my $code_as_ppi   = $munged->ppi;
+    my $location      = $munged->element->location;
+
+=head1 DESCRIPTION
+
+This module will lexically replace a variable name.
+
+=head1 METHODS
+
+=over 4
+
+=item new()
+
+Constructor. Generally shouldn't be called with any arguments.
+
+=item rename( ppi => PPI::Document $ppi, line => Int, column => Int, replacement => Str )
+=item rename( code => Str $code, line => Int, column => Int, replacement => Str )
+=item rename( code => Str $code, line => Int, column => Int, to_camel_case => Bool, [ucfirst => Bool] )
+=item rename( code => Str $code, line => Int, column => Int, from_camel_case => Bool, [ucfirst => Bool] )
+
+Accepts either a C<PPI::Document> to process or a string containing
+the code (which will be converted into a C<PPI::Document>) to process.
+Renames the variable found at line, column with that supplied in the C<replacement>
+parameter and returns a C<PPIx::EditorTools::ReturnObject> with the
+new code available via the C<ppi> or C<code> accessors, as a
+C<PPI::Document> or C<string>, respectively. The C<PPI::Token> found at
+line, column is available via the C<element> accessor.
+
+Instead of specifying an explicit replacement variable name, you may
+choose to use the C<to_camel_case> or C<from_camel_case> options that automatically
+convert to/from camelCase. In that mode, the C<ucfirst> option will force
+uppercasing of the first letter.
+
+You can not specify a replacement name and use the C<to/from_camel_case>
+options.
+
+Croaks with a "no token" exception if no token is found at the location.
+Croaks with a "no declaration" exception if unable to find the declaration.
+
+=back
+
+=cut
 
 sub rename {
 	my ( $self, %args ) = @_;
@@ -193,100 +245,11 @@ sub _curlify {
 
 1;
 
-
-
-=pod
-
-=head1 NAME
-
-PPIx::EditorTools::RenameVariable - Lexically replace a variable name in Perl code
-
-=head1 VERSION
-
-version 0.13
-
-=head1 SYNOPSIS
-
-    my $munged = PPIx::EditorTools::RenameVariable->new->rename(
-        code        => $code,
-        line        => 15,
-        column      => 13,
-        replacement => 'stuff',
-    );
-    my $code_as_strig = $munged->code;
-    my $code_as_ppi   = $munged->ppi;
-    my $location      = $munged->element->location;
-
-=head1 DESCRIPTION
-
-This module will lexically replace a variable name.
-
-=head1 METHODS
-
-=over 4
-
-=item new()
-
-Constructor. Generally shouldn't be called with any arguments.
-
-=item rename( ppi => PPI::Document $ppi, line => Int, column => Int, replacement => Str )
-=item rename( code => Str $code, line => Int, column => Int, replacement => Str )
-=item rename( code => Str $code, line => Int, column => Int, to_camel_case => Bool, [ucfirst => Bool] )
-=item rename( code => Str $code, line => Int, column => Int, from_camel_case => Bool, [ucfirst => Bool] )
-
-Accepts either a C<PPI::Document> to process or a string containing
-the code (which will be converted into a C<PPI::Document>) to process.
-Renames the variable found at line, column with that supplied in the C<replacement>
-parameter and returns a C<PPIx::EditorTools::ReturnObject> with the
-new code available via the C<ppi> or C<code> accessors, as a
-C<PPI::Document> or C<string>, respectively. The C<PPI::Token> found at
-line, column is available via the C<element> accessor.
-
-Instead of specifying an explicit replacement variable name, you may
-choose to use the C<to_camel_case> or C<from_camel_case> options that automatically
-convert to/from camelCase. In that mode, the C<ucfirst> option will force
-uppercasing of the first letter.
-
-You can not specify a replacement name and use the C<to/from_camel_case>
-options.
-
-Croaks with a "no token" exception if no token is found at the location.
-Croaks with a "no declaration" exception if unable to find the declaration.
-
-=back
+__END__
 
 =head1 SEE ALSO
 
 This class inherits from C<PPIx::EditorTools>.
 Also see L<App::EditorTools>, L<Padre>, and L<PPI>.
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Steffen Mueller C<smueller@cpan.org>
-
-=item *
-
-Repackaged by Mark Grimes C<mgrimes@cpan.org>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-

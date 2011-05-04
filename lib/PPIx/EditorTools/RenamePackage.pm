@@ -1,7 +1,4 @@
 package PPIx::EditorTools::RenamePackage;
-BEGIN {
-  $PPIx::EditorTools::RenamePackage::VERSION = '0.13';
-}
 
 # ABSTRACT: Change the package name
 
@@ -17,40 +14,9 @@ use Class::XSAccessor accessors => { 'replacement' => 'replacement' };
 use PPI;
 use Carp;
 
-
-sub rename {
-	my ( $self, %args ) = @_;
-	$self->process_doc(%args);
-	my $replacement = $args{replacement} || croak "replacement required";
-
-	my $doc = $self->ppi;
-
-	# TODO: support MooseX::Declare
-	my $package = $doc->find_first('PPI::Statement::Package')
-		or die "no package found";
-	my $namespace = $package->schild(1) or croak "package name not found";
-	$namespace->isa('PPI::Token::Word') or croak "package name not found";
-	$namespace->{content} = $replacement;
-
-	return PPIx::EditorTools::ReturnObject->new(
-		ppi     => $doc,
-		element => $package
-	);
-}
-
-1;
-
-
+our $VERSION = '0.14';
 
 =pod
-
-=head1 NAME
-
-PPIx::EditorTools::RenamePackage - Change the package name
-
-=head1 VERSION
-
-version 0.13
 
 =head1 SYNOPSIS
 
@@ -91,39 +57,36 @@ package name.
 
 =back
 
+=cut
+
+sub rename {
+	my ( $self, %args ) = @_;
+	$self->process_doc(%args);
+	my $replacement = $args{replacement} || croak "replacement required";
+
+	my $doc = $self->ppi;
+
+	# TODO: support MooseX::Declare
+	my $package = $doc->find_first('PPI::Statement::Package')
+		or die "no package found";
+	my $namespace = $package->schild(1) or croak "package name not found";
+	$namespace->isa('PPI::Token::Word') or croak "package name not found";
+	$namespace->{content} = $replacement;
+
+	return PPIx::EditorTools::ReturnObject->new(
+		ppi     => $doc,
+		element => $package
+	);
+}
+
+1;
+
+__END__
+
+
 =head1 SEE ALSO
 
 This class inherits from C<PPIx::EditorTools>.
 Also see L<App::EditorTools>, L<Padre>, and L<PPI>.
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Steffen Mueller C<smueller@cpan.org>
-
-=item *
-
-Repackaged by Mark Grimes C<mgrimes@cpan.org>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-
-

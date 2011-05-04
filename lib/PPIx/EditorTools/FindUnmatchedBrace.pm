@@ -1,7 +1,4 @@
 package PPIx::EditorTools::FindUnmatchedBrace;
-BEGIN {
-  $PPIx::EditorTools::FindUnmatchedBrace::VERSION = '0.13';
-}
 
 # ABSTRACT: PPI-based unmatched-brace-finder
 
@@ -15,42 +12,9 @@ use Class::XSAccessor accessors => {};
 
 use PPI;
 
-
-sub find {
-	my ( $self, %args ) = @_;
-	$self->process_doc(%args);
-
-	my $ppi = $self->ppi;
-
-	my $where = $ppi->find( \&PPIx::EditorTools::find_unmatched_brace );
-	if ($where) {
-		@$where = sort {
-			       PPIx::EditorTools::element_depth($b) <=> PPIx::EditorTools::element_depth($a)
-				or $a->location->[0] <=> $b->location->[0]
-				or $a->location->[1] <=> $b->location->[1]
-		} @$where;
-
-		return PPIx::EditorTools::ReturnObject->new(
-			ppi     => $ppi,
-			element => $where->[0]
-		);
-	}
-	return;
-}
-
-1;
-
-
+our $VERSION = '0.14';
 
 =pod
-
-=head1 NAME
-
-PPIx::EditorTools::FindUnmatchedBrace - PPI-based unmatched-brace-finder
-
-=head1 VERSION
-
-version 0.13
 
 =head1 SYNOPSIS
 
@@ -83,41 +47,40 @@ If there is no unmatched brace, returns undef.
 
 =back
 
+=cut
+
+sub find {
+	my ( $self, %args ) = @_;
+	$self->process_doc(%args);
+
+	my $ppi = $self->ppi;
+
+	my $where = $ppi->find( \&PPIx::EditorTools::find_unmatched_brace );
+	if ($where) {
+		@$where = sort {
+			       PPIx::EditorTools::element_depth($b) <=> PPIx::EditorTools::element_depth($a)
+				or $a->location->[0] <=> $b->location->[0]
+				or $a->location->[1] <=> $b->location->[1]
+		} @$where;
+
+		return PPIx::EditorTools::ReturnObject->new(
+			ppi     => $ppi,
+			element => $where->[0]
+		);
+	}
+	return;
+}
+
+1;
+
+__END__
+
 =head1 SEE ALSO
 
 This class inherits from C<PPIx::EditorTools>.
 Also see L<App::EditorTools>, L<Padre>, and L<PPI>.
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Steffen Mueller C<smueller@cpan.org>
-
-=item *
-
-Repackaged by Mark Grimes C<mgrimes@cpan.org>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-
 
 # Copyright 2008-2009 The Padre development team as listed in Padre.pm.
 # LICENSE

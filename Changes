@@ -1,6 +1,6 @@
 Revision history for PPIx-EditorTools
 
-0.13   2011.03.24
+{{$NEXT}}
 
 0.13 2011.03.24
 	- Copy the lexer code used for syntax highlighting in 

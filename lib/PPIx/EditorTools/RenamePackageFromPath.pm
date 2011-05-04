@@ -1,7 +1,4 @@
 package PPIx::EditorTools::RenamePackageFromPath;
-BEGIN {
-  $PPIx::EditorTools::RenamePackageFromPath::VERSION = '0.13';
-}
 
 # ABSTRACT: Change the package name based on the files path
 
@@ -21,42 +18,9 @@ use Carp;
 use File::Spec;
 use File::Basename;
 
-
-sub rename {
-	my ( $self, %args ) = @_;
-	$self->process_doc(%args);
-	my $path = $args{filename} || croak "filename required";
-
-	my $dir = dirname $path;
-	my $file = basename $path, qw/.pm .PM .Pm/;
-
-	my @directories =
-		grep { $_ && !/^\.$/ } File::Spec->splitdir( File::Spec->rel2abs($dir) );
-	my $replacement;
-	if ( grep {/^lib$/} @directories ) {
-		while ( shift(@directories) !~ /^lib$/ ) { }
-	} else {
-		@directories = grep { $_ && !/^\.$/ } File::Spec->splitdir($dir);
-	}
-	$replacement = join( '::', @directories, $file );
-
-	return PPIx::EditorTools::RenamePackage->new( ppi => $self->ppi )->rename( replacement => $replacement );
-
-}
-
-1;
-
-
+our $VERSION = '0.14';
 
 =pod
-
-=head1 NAME
-
-PPIx::EditorTools::RenamePackageFromPath - Change the package name based on the files path
-
-=head1 VERSION
-
-version 0.13
 
 =head1 SYNOPSIS
 
@@ -103,38 +67,37 @@ package name.
 
 =back
 
+=cut
+
+sub rename {
+	my ( $self, %args ) = @_;
+	$self->process_doc(%args);
+	my $path = $args{filename} || croak "filename required";
+
+	my $dir = dirname $path;
+	my $file = basename $path, qw/.pm .PM .Pm/;
+
+	my @directories =
+		grep { $_ && !/^\.$/ } File::Spec->splitdir( File::Spec->rel2abs($dir) );
+	my $replacement;
+	if ( grep {/^lib$/} @directories ) {
+		while ( shift(@directories) !~ /^lib$/ ) { }
+	} else {
+		@directories = grep { $_ && !/^\.$/ } File::Spec->splitdir($dir);
+	}
+	$replacement = join( '::', @directories, $file );
+
+	return PPIx::EditorTools::RenamePackage->new( ppi => $self->ppi )->rename( replacement => $replacement );
+
+}
+
+1;
+
+__END__
+
 =head1 SEE ALSO
 
 This class inherits from C<PPIx::EditorTools>.
 Also see L<App::EditorTools>, L<Padre>, and L<PPI>.
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Steffen Mueller C<smueller@cpan.org>
-
-=item *
-
-Repackaged by Mark Grimes C<mgrimes@cpan.org>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-

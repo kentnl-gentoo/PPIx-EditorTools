@@ -1,7 +1,4 @@
 package PPIx::EditorTools::ReturnObject;
-BEGIN {
-  $PPIx::EditorTools::ReturnObject::VERSION = '0.13';
-}
 
 # ABSTRACT: Simple object to return values from PPIx::EditorTools
 
@@ -10,71 +7,9 @@ use strict;
 use warnings;
 use Carp;
 
-
-sub new {
-	my $class = shift;
-	return bless {@_}, ref($class) || $class;
-}
-
-sub element {
-	my ($self) = @_;
-
-	# If element is a code ref, run the code once then cache the
-	# result
-	if (    exists $self->{element}
-		and ref( $self->{element} )
-		and ref( $self->{element} ) eq 'CODE' )
-	{
-		$self->{element} = $self->{element}->(@_);
-	}
-
-	return $self->{element};
-}
-
-sub ppi {
-	my ( $self, $doc ) = @_;
-
-	# $self->{ppi} = $doc if $doc;    # TODO: and isa?
-
-	return $self->{ppi} if $self->{ppi};
-
-	if ( $self->{code} ) {
-		my $code = $self->{code};
-		$self->{ppi} = PPI::Document->new( \$code );
-		return $self->{ppi};
-	}
-
-	return;
-}
-
-sub code {
-	my ( $self, $doc ) = @_;
-
-	# $self->{code} = $doc if $doc;
-
-	return $self->{code} if $self->{code};
-
-	if ( $self->{ppi} ) {
-		$self->{code} = $self->{ppi}->serialize;
-		return $self->{code};
-	}
-
-	return;
-}
-
-1;
-
-
+our $VERSION = '0.14';
 
 =pod
-
-=head1 NAME
-
-PPIx::EditorTools::ReturnObject - Simple object to return values from PPIx::EditorTools
-
-=head1 VERSION
-
-version 0.13
 
 =head1 SYNOPSIS
 
@@ -135,40 +70,68 @@ from the C<PPI::Document> via the serialize method (lazily) if needed.
 
 =back
 
+=cut
+
+sub new {
+	my $class = shift;
+	return bless {@_}, ref($class) || $class;
+}
+
+sub element {
+	my ($self) = @_;
+
+	# If element is a code ref, run the code once then cache the
+	# result
+	if (    exists $self->{element}
+		and ref( $self->{element} )
+		and ref( $self->{element} ) eq 'CODE' )
+	{
+		$self->{element} = $self->{element}->(@_);
+	}
+
+	return $self->{element};
+}
+
+sub ppi {
+	my ( $self, $doc ) = @_;
+
+	# $self->{ppi} = $doc if $doc;    # TODO: and isa?
+
+	return $self->{ppi} if $self->{ppi};
+
+	if ( $self->{code} ) {
+		my $code = $self->{code};
+		$self->{ppi} = PPI::Document->new( \$code );
+		return $self->{ppi};
+	}
+
+	return;
+}
+
+sub code {
+	my ( $self, $doc ) = @_;
+
+	# $self->{code} = $doc if $doc;
+
+	return $self->{code} if $self->{code};
+
+	if ( $self->{ppi} ) {
+		$self->{code} = $self->{ppi}->serialize;
+		return $self->{code};
+	}
+
+	return;
+}
+
+1;
+
+__END__
+
 =head1 SEE ALSO
 
 C<PPIx::EditorTools>, L<App::EditorTools>, L<Padre>, and L<PPI>.
 
-=head1 AUTHORS
-
-=over 4
-
-=item *
-
-Steffen Mueller C<smueller@cpan.org>
-
-=item *
-
-Repackaged by Mark Grimes C<mgrimes@cpan.org>
-
-=item *
-
-Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
-
-=back
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is copyright (c) 2011 by The Padre development team as listed in Padre.pm.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
 =cut
-
-
-__END__
-
 
 # Copyright 2008-2009 The Padre development team as listed in Padre.pm.
 # LICENSE
