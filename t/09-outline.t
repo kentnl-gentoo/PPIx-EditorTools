@@ -9,6 +9,7 @@ BEGIN {
 use Test::More;
 use Test::Differences;
 use PPI;
+use PPIx::EditorTools::Outline;
 
 BEGIN {
 	if ( $PPI::VERSION =~ /_/ ) {
@@ -108,9 +109,98 @@ END_CODE
 	},
 );
 
-plan tests => @cases * 1;
+##############
+# Moose outline testing follows
+##############
 
-use PPIx::EditorTools::Outline;
+push @cases, (
+	{   file     => 't/outline/Mooclass.pm',
+		expected => [
+			{   'modules' => [
+					{   'name' => 'MooseX::Declare',
+						'line' => 1,
+					},
+				],
+				'methods' => [
+					{   'name' => 'pub_sub',
+						'line' => 12,
+					},
+					{   'name' => '_pri_sub',
+						'line' => 16,
+					},
+					{   'name' => 'mm_before',
+						'line' => 20
+					},
+					{   'name' => 'mm_after',
+						'line' => 24
+					},
+					{   'name' => 'mm_around',
+						'line' => 28
+					},
+					{   'name' => 'mm_override',
+						'line' => 32
+					},
+					{   'name' => 'mm_augment',
+						'line' => 36
+					},
+				],
+				'line'       => 3,
+				'name'       => 'Mooclass',
+				'attributes' => [
+					{   'name' => 'moo_att',
+						'line' => 5
+					},
+					{   'name' => 'label',
+						'line' => 7
+					},
+					{   'name' => 'progress',
+						'line' => 7
+					},
+					{   'name' => 'butWarn',
+						'line' => 7
+					},
+					{   'name' => 'butTime',
+						'line' => 7
+					},
+					{   'name' => 'start_stop',
+						'line' => 7
+					},
+					{   'name' => 'account',
+						'line' => 10
+					},
+				],
+			}
+		],
+	},
+	{   file     => 't/outline/Moorole.pm',
+		expected => [
+			{   'modules' => [
+					{   'name' => 'MooseX::Declare',
+						'line' => 1,
+					},
+				],
+				'line' => 3,
+				'name' => 'Moorole',
+
+				'attributes' => [
+					{   'line' => 7,
+						'name' => 'balance'
+					},
+					{   'line' => 13,
+						'name' => 'overdraft'
+					}
+				],
+				'pragmata' => [
+					{   'line' => 5,
+						'name' => 'version'
+					}
+				]
+			}
+		]
+	},
+);
+
+plan tests => @cases * 1;
 
 foreach my $c (@cases) {
 	my $code = $c->{code};

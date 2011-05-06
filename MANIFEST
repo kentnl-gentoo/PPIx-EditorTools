@@ -33,3 +33,5 @@ t/10-lexer.t
 t/outline/file1.pl
 t/outline/file2.pl
 t/outline/Foo.pm
+t/outline/Mooclass.pm
+t/outline/Moorole.pm
