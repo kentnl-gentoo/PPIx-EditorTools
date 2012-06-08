@@ -123,25 +123,25 @@ push @cases, (
 				],
 				'methods' => [
 					{   'name' => 'pub_sub',
-						'line' => 12,
+						'line' => 14,
 					},
 					{   'name' => '_pri_sub',
-						'line' => 16,
+						'line' => 18,
 					},
 					{   'name' => 'mm_before',
-						'line' => 20
+						'line' => 22,
 					},
 					{   'name' => 'mm_after',
-						'line' => 24
+						'line' => 26,
 					},
 					{   'name' => 'mm_around',
-						'line' => 28
+						'line' => 30,
 					},
 					{   'name' => 'mm_override',
-						'line' => 32
+						'line' => 34,
 					},
 					{   'name' => 'mm_augment',
-						'line' => 36
+						'line' => 38,
 					},
 				],
 				'line'       => 3,
@@ -167,6 +167,72 @@ push @cases, (
 					},
 					{   'name' => 'account',
 						'line' => 10
+					},
+					{   'name' => 'non_quoted_attr',
+						'line' => 12
+					},
+				],
+			}
+		],
+	},
+
+	# can we do the same thing with vanilla Moose class definitions?
+	{   file     => 't/outline/MooclassVanilla.pm',
+		expected => [
+			{   'modules' => [
+					{   'name' => 'Moose',
+						'line' => 3,
+					},
+				],
+				'methods' => [
+					{   'name' => 'pub_sub',
+						'line' => 13,
+					},
+					{   'name' => '_pri_sub',
+						'line' => 17,
+					},
+					{   'name' => 'mm_before',
+						'line' => 21,
+					},
+					{   'name' => 'mm_after',
+						'line' => 25,
+					},
+					{   'name' => 'mm_around',
+						'line' => 29,
+					},
+					{   'name' => 'mm_override',
+						'line' => 33,
+					},
+					{   'name' => 'mm_augment',
+						'line' => 37,
+					},
+				],
+				'line'       => 1,
+				'name'       => 'Moose::Declarations::MethodModifiers::Vanilla',
+				'attributes' => [
+					{   'name' => 'moo_att',
+						'line' => 5,
+					},
+					{   'name' => 'label',
+						'line' => 7,
+					},
+					{   'name' => 'progress',
+						'line' => 7,
+					},
+					{   'name' => 'butWarn',
+						'line' => 7,
+					},
+					{   'name' => 'butTime',
+						'line' => 7,
+					},
+					{   'name' => 'start_stop',
+						'line' => 7,
+					},
+					{   'name' => 'account',
+						'line' => 9,
+					},
+					{   'name' => 'non_quoted_attr',
+						'line' => 11,
 					},
 				],
 			}
@@ -198,6 +264,42 @@ push @cases, (
 			}
 		]
 	},
+	{   file     => 't/outline/Moofirst.pm',
+		expected => [
+			{   'attributes' => [
+					{   'line' => 7,
+						'name' => 'balance'
+					},
+					{   'line' => 13,
+						'name' => 'overdraft'
+					},
+					{   'line' => 23,
+						'name' => 'name'
+					},
+					{   'line' => 25,
+						'name' => 'account'
+					}
+				],
+				'line'    => 3,
+				'methods' => [
+					{   'line' => 27,
+						'name' => '_build_overdraft'
+					}
+				],
+				'modules' => [
+					{   'line' => 1,
+						'name' => 'MooseX::Declare'
+					}
+				],
+				'name'     => 'Moofirst',
+				'pragmata' => [
+					{   'line' => 5,
+						'name' => 'version'
+					}
+				]
+			}
+		]
+	},
 );
 
 plan tests => @cases * 1;
@@ -205,7 +307,7 @@ plan tests => @cases * 1;
 foreach my $c (@cases) {
 	my $code = $c->{code};
 	if ( $c->{file} ) {
-		open my $fh, '<', $c->{file} or die;
+		open my $fh, '<', $c->{file} or die( "couldn't read file: ", $c->{file}, ": $!" );
 		local $/ = undef;
 		$code = <$fh>;
 	}
@@ -214,4 +316,3 @@ foreach my $c (@cases) {
 	#diag explain $outline;
 	is_deeply $outline, $c->{expected} or diag explain $outline;
 }
-

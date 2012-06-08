@@ -1,11 +1,11 @@
 ---
-abstract: ~
+abstract: 'Utility methods and base class for manipulating Perl via PPI'
 author:
   - 'Steffen Mueller C<smueller@cpan.org>'
   - 'Repackaged by Mark Grimes C<mgrimes@cpan.org>'
   - 'Ahmad M. Zawawi <ahmad.zawawi@gmail.com>'
 build_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.59
   File::Find: 0
   File::Temp: 0
   Test::Differences: 0
@@ -13,9 +13,10 @@ build_requires:
   Test::Most: 0
   Test::NoWarnings: 0.084
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.59
 distribution_type: module
-generated_by: 'Module::Install version 1.00'
+dynamic_config: 1
+generated_by: 'Module::Install version 1.06'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -25,12 +26,13 @@ no_index:
   directory:
     - inc
     - t
+    - xt
 requires:
   Carp: 0
   Class::XSAccessor: 1.02
   File::Basename: 0
   File::Spec: 0
-  PPI: 1.203
+  PPI: 1.215
   PPI::Find: 0
   perl: 5.008005
 resources:
@@ -38,4 +40,4 @@ resources:
   homepage: http://padre.perlide.org/
   license: http://dev.perl.org/licenses/
   repository: http://svn.perlide.org/padre/trunk/PPIx-EditorTools/
-version: 0.15
+version: 0.15_02
