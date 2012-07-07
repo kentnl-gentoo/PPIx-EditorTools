@@ -40,6 +40,7 @@ t/outline/Mooclass.pm
 t/outline/MooclassVanilla.pm
 t/outline/Moofirst.pm
 t/outline/Moorole.pm
+t/outline/test_1435.pl
 xt/changes.t
 xt/critic.t
 xt/distmanifest.t
