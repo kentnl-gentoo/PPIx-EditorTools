@@ -41,4 +41,4 @@ resources:
   homepage: http://padre.perlide.org/
   license: http://dev.perl.org/licenses/
   repository: http://svn.perlide.org/padre/trunk/PPIx-EditorTools/
-version: 0.15_03
+version: 0.15_04
