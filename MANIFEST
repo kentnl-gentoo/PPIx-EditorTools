@@ -20,7 +20,6 @@ lib/PPIx/EditorTools/ReturnObject.pm
 Makefile.PL
 MANIFEST			This list of files
 META.yml
-README
 script/ppix_editortools
 t/00-ppix-editortools.t
 t/01-findunmatchedbrace.t
@@ -40,13 +39,5 @@ t/outline/Mooclass.pm
 t/outline/MooclassVanilla.pm
 t/outline/Moofirst.pm
 t/outline/Moorole.pm
-t/outline/test_1435.pl
-xt/changes.t
-xt/critic.t
-xt/distmanifest.t
-xt/hasversion.t
-xt/kwalitee.t
-xt/meta.t
-xt/minimumversion.t
-xt/pod.t
-xt/podcoverage.t
+t/rename_variable/1.in
+t/rename_variable/1.out

@@ -302,31 +302,6 @@ push @cases, (
 	},
 );
 
-##############
-# has outline testing #1435
-##############
-push @cases, (
-	{   file     => 't/outline/test_1435.pl',
-		expected => [
-			{   'attributes' => [
-					{   'name' => 'first',
-						'line' => 3,
-					},
-					{   'name' => 'second',
-						'line' => 5,
-					},
-				],
-				'modules' => [
-					{   'line' => 1,
-						'name' => 'Class::Accessor'
-					}
-				],
-				'name' => 'main',
-			}
-		],
-	},
-);
-
 plan tests => @cases * 1;
 
 foreach my $c (@cases) {
@@ -339,5 +314,5 @@ foreach my $c (@cases) {
 	my $outline = PPIx::EditorTools::Outline->new->find( code => $code );
 
 	#diag explain $outline;
-	is_deeply ( $outline, $c->{expected}, $c->{file} ) or diag explain $outline;
+	is_deeply $outline, $c->{expected} or diag explain $outline;
 }
