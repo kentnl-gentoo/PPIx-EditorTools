@@ -5,7 +5,7 @@ author:
   - 'Repackaged by Mark Grimes C<mgrimes@cpan.org>'
   - 'Ahmad M. Zawawi <ahmad.zawawi@gmail.com>'
 build_requires:
-  ExtUtils::MakeMaker: 6.59
+  ExtUtils::MakeMaker: 6.57
   File::Find: 0
   File::Temp: 0
   Test::Differences: 0
@@ -13,10 +13,10 @@ build_requires:
   Test::Most: 0
   Test::NoWarnings: 0.084
 configure_requires:
-  ExtUtils::MakeMaker: 6.59
+  ExtUtils::MakeMaker: 6.57
 distribution_type: module
 dynamic_config: 1
-generated_by: 'Module::Install version 1.06'
+generated_by: 'Module::Install version 1.04'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -33,10 +33,11 @@ requires:
   File::Spec: 0
   PPI: 1.215
   PPI::Find: 0
+  Try::Tiny: 0.11
   perl: 5.008005
 resources:
   bugtracker: http://padre.perlide.org/trac/
   homepage: http://padre.perlide.org/
   license: http://dev.perl.org/licenses/
   repository: http://svn.perlide.org/padre/trunk/PPIx-EditorTools/
-version: 0.16
+version: 0.17
