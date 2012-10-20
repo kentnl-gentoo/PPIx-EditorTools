@@ -33,6 +33,7 @@ t/07-renamevariable.t
 t/08-getallvariabledeclarations.t
 t/09-outline.t
 t/10-lexer.t
+t/100-changes.t
 t/outline/file1.pl
 t/outline/file2.pl
 t/outline/Foo.pm
