@@ -6,7 +6,7 @@ use 5.008005;
 use strict;
 
 #use lib 'privinc';
-use inc::Module::Install 1.00;
+use inc::Module::Install 1.06;
 
 #use POSIX qw(locale_h);
 
@@ -55,8 +55,8 @@ test_requires 'Test::NoWarnings'  => '0.084';
 
 no_index 'directory' => qw{ t xt eg share inc privinc };
 homepage 'http://padre.perlide.org/';
-bugtracker 'http://padre.perlide.org/trac/';
-repository 'http://svn.perlide.org/padre/trunk/PPIx-EditorTools/';
+bugtracker 'https://github.com/szabgab/PPIx-EditorTools/issues';
+repository 'https://github.com/szabgab/PPIx-EditorTools';
 
 WriteAll;
 
