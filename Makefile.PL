@@ -6,6 +6,7 @@ use 5.008005;
 use strict;
 
 #use lib 'privinc';
+use lib q[.];
 use inc::Module::Install 1.00;
 
 #use POSIX qw(locale_h);
